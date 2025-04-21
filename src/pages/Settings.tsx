@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
@@ -21,18 +20,17 @@ const Settings = () => {
 
   return (
     <div className="container max-w-2xl mx-auto space-y-8 animate-fade-in">
-      <h1 className="text-3xl font-bold">Settings</h1>
+      <h1 className="text-3xl font-bold">Configurações</h1>
       
       <Card className="p-6">
         <div className="space-y-6">
-          {/* Dark Mode Setting */}
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <Moon className="h-5 w-5" />
               <div>
-                <Label className="text-base">Dark Mode</Label>
+                <Label className="text-base">Modo Escuro</Label>
                 <p className="text-sm text-muted-foreground">
-                  Toggle dark mode on or off
+                  Ativar ou desativar o modo escuro
                 </p>
               </div>
             </div>
@@ -42,27 +40,26 @@ const Settings = () => {
             />
           </div>
 
-          {/* Language Setting */}
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <Globe className="h-5 w-5" />
               <div>
-                <Label className="text-base">Language</Label>
+                <Label className="text-base">Idioma</Label>
                 <p className="text-sm text-muted-foreground">
-                  Choose your preferred language
+                  Escolha seu idioma preferido
                 </p>
               </div>
             </div>
             <Select 
-              defaultValue="en" 
+              defaultValue="pt" 
               onValueChange={handleLanguageChange}
             >
               <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select Language" />
+                <SelectValue placeholder="Selecione o Idioma" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="en">English</SelectItem>
                 <SelectItem value="pt">Português</SelectItem>
+                <SelectItem value="en">English</SelectItem>
               </SelectContent>
             </Select>
           </div>

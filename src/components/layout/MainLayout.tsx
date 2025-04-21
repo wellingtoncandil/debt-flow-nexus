@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useNavigate, Outlet } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
@@ -13,7 +12,6 @@ const MainLayout: React.FC = () => {
   const navigate = useNavigate();
 
   if (!currentUser) {
-    // Redirect to login if not authenticated
     navigate('/login');
     return null;
   }
@@ -28,34 +26,32 @@ const MainLayout: React.FC = () => {
 
   const userInitials = currentUser ? getInitials(currentUser.name) : 'U';
 
-  // Define navigation based on user role
   const institutionNav = [
-    { title: 'Dashboard', href: '/dashboard', icon: PieChart },
+    { title: 'Painel', href: '/dashboard', icon: PieChart },
     { title: 'Upload de Devedores', href: '/upload-debtors', icon: FileText },
-    { title: 'Portfolios', href: '/portfolios', icon: FileText },
-    { title: 'Agencies', href: '/agencies', icon: Users },
-    { title: 'Contracts', href: '/contracts', icon: Link },
-    { title: 'Payments', href: '/payments', icon: DollarSign },
-    { title: 'Settings', href: '/settings', icon: Settings },
+    { title: 'Portfólios', href: '/portfolios', icon: FileText },
+    { title: 'Agências', href: '/agencies', icon: Users },
+    { title: 'Contratos', href: '/contracts', icon: Link },
+    { title: 'Pagamentos', href: '/payments', icon: DollarSign },
+    { title: 'Configurações', href: '/settings', icon: Settings },
   ];
 
   const agencyNav = [
-    { title: 'Dashboard', href: '/dashboard', icon: BarChart },
-    { title: 'Opportunities', href: '/opportunities', icon: FileText },
-    { title: 'Contracts', href: '/contracts', icon: Link },
-    { title: 'Payments', href: '/payments', icon: CreditCard },
-    { title: 'Settings', href: '/settings', icon: Settings },
+    { title: 'Painel', href: '/dashboard', icon: BarChart },
+    { title: 'Oportunidades', href: '/opportunities', icon: FileText },
+    { title: 'Contratos', href: '/contracts', icon: Link },
+    { title: 'Pagamentos', href: '/payments', icon: CreditCard },
+    { title: 'Configurações', href: '/settings', icon: Settings },
   ];
 
   const adminNav = [
-    { title: 'Dashboard', href: '/dashboard', icon: PieChart },
-    { title: 'Institutions', href: '/institutions', icon: Users },
-    { title: 'Agencies', href: '/agencies', icon: Users },
-    { title: 'All Contracts', href: '/all-contracts', icon: FileText },
-    { title: 'System Settings', href: '/system-settings', icon: Settings },
+    { title: 'Painel', href: '/dashboard', icon: PieChart },
+    { title: 'Instituições', href: '/institutions', icon: Users },
+    { title: 'Agências', href: '/agencies', icon: Users },
+    { title: 'Todos os Contratos', href: '/all-contracts', icon: FileText },
+    { title: 'Configurações do Sistema', href: '/system-settings', icon: Settings },
   ];
 
-  // Select navigation based on user role
   let navigation;
   switch (currentUser.role) {
     case 'institution':
@@ -145,16 +141,16 @@ const MainLayout: React.FC = () => {
           <header className="border-b h-14 flex items-center px-6 bg-white">
             <SidebarTrigger />
             <div className="ml-4 font-medium text-lg">
-              {currentUser.role === 'institution' && 'Institution Dashboard'}
-              {currentUser.role === 'agency' && 'Agency Dashboard'}
-              {currentUser.role === 'admin' && 'Admin Dashboard'}
+              {currentUser?.role === 'institution' && 'Painel da Instituição'}
+              {currentUser?.role === 'agency' && 'Painel da Agência'}
+              {currentUser?.role === 'admin' && 'Painel do Administrador'}
             </div>
           </header>
           <main className="flex-1 p-6 overflow-auto bg-background">
             <Outlet />
           </main>
           <footer className="border-t py-4 px-6 text-center text-sm text-muted-foreground">
-            DebtFlow Nexus &copy; {new Date().getFullYear()} - Debt Collection Management Platform
+            DebtFlow Nexus &copy; {new Date().getFullYear()} - Plataforma de Gestão de Cobranças
           </footer>
         </div>
       </div>

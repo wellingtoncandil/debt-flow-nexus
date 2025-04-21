@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useAuth } from '@/context/AuthContext';
 import StatCard from '@/components/dashboard/StatCard';
@@ -29,28 +28,22 @@ const Dashboard: React.FC = () => {
     return `${(numValue * 100).toFixed(1)}%`;
   };
 
-  // Only show recent portfolios created by the current institution
   const recentPortfolios = currentUser?.role === 'institution' 
     ? mockPortfolios.filter(p => p.institutionId === currentUser.companyId).slice(0, 3)
     : [];
   
-  // Only show bids for agency users
   const recentBids = currentUser?.role === 'agency' 
     ? mockBids.filter(b => b.agencyId === currentUser.companyId).slice(0, 3)
     : [];
   
-  // Show portfolios with bidding status for agencies
   const bidOpportunities = currentUser?.role === 'agency'
     ? mockPortfolios.filter(p => p.status === 'bidding').slice(0, 3)
     : [];
   
-  // Payment data
   const payments = mockPayments;
   
-  // Stats based on user role
   const stats = currentUser?.role === 'institution' ? mockInstitutionStats : mockAgencyStats;
 
-  // Payment table columns
   const paymentColumns: ColumnDef<Payment>[] = [
     {
       accessorKey: "id",
@@ -86,44 +79,40 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold">Dashboard</h1>
+      <h1 className="text-3xl font-bold">Painel de Controle</h1>
       
-      {/* Stats Row */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard 
-          title="Total Portfolio Value" 
+          title="Valor Total do Portfólio" 
           value={stats.totalDebtValue}
           icon={<CreditCard className="h-4 w-4" />}
           formatter={formatCurrency}
         />
         <StatCard 
-          title="Recovered Value" 
+          title="Valor Recuperado" 
           value={stats.recoveredValue}
           icon={<DollarSign className="h-4 w-4" />}
           formatter={formatCurrency}
         />
         <StatCard 
-          title="Recovery Rate" 
+          title="Taxa de Recuperação" 
           value={stats.recoveryRate}
           icon={<PieChart className="h-4 w-4" />}
           formatter={formatPercentage}
-          description="Of total debt value"
+          description="Do valor total da dívida"
         />
         <StatCard 
-          title="Active Contracts" 
+          title="Contratos Ativos" 
           value={stats.activeContracts}
           icon={<FileText className="h-4 w-4" />}
         />
       </div>
 
-      {/* Main Content */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Column */}
         <div className="lg:col-span-2 space-y-6">
-          {/* Recent Activity */}
           <Card>
             <CardHeader>
-              <CardTitle>Recent Payments</CardTitle>
+              <CardTitle>Pagamentos Recentes</CardTitle>
             </CardHeader>
             <CardContent>
               <DataTable columns={paymentColumns} data={payments} />
@@ -131,12 +120,11 @@ const Dashboard: React.FC = () => {
           </Card>
         </div>
 
-        {/* Right Column */}
         <div className="space-y-6">
           {currentUser?.role === 'institution' && (
             <Card>
               <CardHeader>
-                <CardTitle>Recent Portfolios</CardTitle>
+                <CardTitle>Portfólios Recentes</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 {recentPortfolios.length > 0 ? (
@@ -146,7 +134,7 @@ const Dashboard: React.FC = () => {
                     </div>
                   ))
                 ) : (
-                  <p className="text-fin-neutral-500 text-sm">No portfolios created yet.</p>
+                  <p className="text-fin-neutral-500 text-sm">Nenhum portfólio criado ainda.</p>
                 )}
               </CardContent>
             </Card>
@@ -156,7 +144,7 @@ const Dashboard: React.FC = () => {
             <>
               <Card>
                 <CardHeader>
-                  <CardTitle>Bidding Opportunities</CardTitle>
+                  <CardTitle>Oportunidades de Lance</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {bidOpportunities.length > 0 ? (
@@ -166,14 +154,14 @@ const Dashboard: React.FC = () => {
                       </div>
                     ))
                   ) : (
-                    <p className="text-fin-neutral-500 text-sm">No open opportunities available.</p>
+                    <p className="text-fin-neutral-500 text-sm">Nenhuma oportunidade disponível.</p>
                   )}
                 </CardContent>
               </Card>
               
               <Card>
                 <CardHeader>
-                  <CardTitle>Recent Bids</CardTitle>
+                  <CardTitle>Lances Recentes</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {recentBids.length > 0 ? (
@@ -183,7 +171,7 @@ const Dashboard: React.FC = () => {
                       </div>
                     ))
                   ) : (
-                    <p className="text-fin-neutral-500 text-sm">No bids placed yet.</p>
+                    <p className="text-fin-neutral-500 text-sm">Nenhum lance feito ainda.</p>
                   )}
                 </CardContent>
               </Card>

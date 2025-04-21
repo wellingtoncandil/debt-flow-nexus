@@ -56,121 +56,65 @@ const Login: React.FC = () => {
             </div>
             <h1 className="text-3xl font-bold ml-2">DebtFlow</h1>
           </div>
-          <p className="text-fin-neutral-600 mt-2">Debt Collection Management Platform</p>
+          <p className="text-fin-neutral-600 mt-2">Plataforma de Gestão de Cobrança</p>
         </div>
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-xl">Sign In</CardTitle>
+            <CardTitle className="text-xl">Entrar</CardTitle>
             <CardDescription>
-              Access your DebtFlow dashboard
+              Acesse seu painel DebtFlow
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="institution" onValueChange={(value) => setRole(value)}>
               <TabsList className="grid grid-cols-3 mb-6">
-                <TabsTrigger value="institution">Institution</TabsTrigger>
-                <TabsTrigger value="agency">Collection Agency</TabsTrigger>
-                <TabsTrigger value="admin">Admin</TabsTrigger>
+                <TabsTrigger value="institution">Instituição</TabsTrigger>
+                <TabsTrigger value="agency">Agência de Cobrança</TabsTrigger>
+                <TabsTrigger value="admin">Administrador</TabsTrigger>
               </TabsList>
-              <TabsContent value="institution">
-                <form onSubmit={handleSubmit}>
-                  <div className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
-                      <Input 
-                        id="email" 
-                        type="email" 
-                        placeholder="your@email.com" 
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between">
-                        <Label htmlFor="password">Password</Label>
-                        <a href="#" className="text-xs text-fin-blue-500 hover:underline">
-                          Forgot password?
-                        </a>
+              {["institution", "agency", "admin"].map((tabValue) => (
+                <TabsContent key={tabValue} value={tabValue}>
+                  <form onSubmit={handleSubmit}>
+                    <div className="space-y-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="email">Email</Label>
+                        <Input 
+                          id="email" 
+                          type="email" 
+                          placeholder="seu@email.com" 
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                        />
                       </div>
-                      <Input 
-                        id="password" 
-                        type="password" 
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                      />
-                    </div>
-                    <Button type="submit" className="w-full">Sign In to Institution Portal</Button>
-                  </div>
-                </form>
-              </TabsContent>
-              <TabsContent value="agency">
-                <form onSubmit={handleSubmit}>
-                  <div className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
-                      <Input 
-                        id="email" 
-                        type="email" 
-                        placeholder="your@email.com" 
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between">
-                        <Label htmlFor="password">Password</Label>
-                        <a href="#" className="text-xs text-fin-blue-500 hover:underline">
-                          Forgot password?
-                        </a>
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between">
+                          <Label htmlFor="password">Senha</Label>
+                          <a href="#" className="text-xs text-fin-blue-500 hover:underline">
+                            Esqueceu a senha?
+                          </a>
+                        </div>
+                        <Input 
+                          id="password" 
+                          type="password" 
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                        />
                       </div>
-                      <Input 
-                        id="password" 
-                        type="password" 
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                      />
+                      <Button type="submit" className="w-full">
+                        {tabValue === "institution" && "Entrar como Instituição"}
+                        {tabValue === "agency" && "Entrar como Agência"}
+                        {tabValue === "admin" && "Entrar como Administrador"}
+                      </Button>
                     </div>
-                    <Button type="submit" className="w-full">Sign In to Agency Portal</Button>
-                  </div>
-                </form>
-              </TabsContent>
-              <TabsContent value="admin">
-                <form onSubmit={handleSubmit}>
-                  <div className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
-                      <Input 
-                        id="email" 
-                        type="email" 
-                        placeholder="your@email.com" 
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between">
-                        <Label htmlFor="password">Password</Label>
-                        <a href="#" className="text-xs text-fin-blue-500 hover:underline">
-                          Forgot password?
-                        </a>
-                      </div>
-                      <Input 
-                        id="password" 
-                        type="password" 
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                      />
-                    </div>
-                    <Button type="submit" className="w-full">Sign In to Admin Panel</Button>
-                  </div>
-                </form>
-              </TabsContent>
+                  </form>
+                </TabsContent>
+              ))}
             </Tabs>
           </CardContent>
           <CardFooter className="flex flex-col space-y-2">
             <div className="text-center text-sm text-fin-neutral-500">
-              Don't have an account? <a href="#" className="text-fin-blue-500 hover:underline">Contact us</a> to get started.
+              Não tem uma conta? <a href="#" className="text-fin-blue-500 hover:underline">Entre em contato</a> para começar.
             </div>
           </CardFooter>
         </Card>

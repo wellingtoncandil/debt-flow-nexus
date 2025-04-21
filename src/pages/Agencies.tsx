@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { mockCompanies } from '@/data/mockData';
@@ -16,7 +15,6 @@ const Agencies: React.FC = () => {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
   
-  // Check if user is an institution
   if (currentUser?.role !== 'institution') {
     return (
       <Alert variant="destructive">
@@ -28,10 +26,8 @@ const Agencies: React.FC = () => {
     );
   }
   
-  // Filter only agency companies
   const agencies = mockCompanies.filter(c => c.type === 'agency');
   
-  // Get initials for avatar
   const getInitials = (name: string) => {
     return name
       .split(' ')
@@ -40,13 +36,11 @@ const Agencies: React.FC = () => {
       .toUpperCase();
   };
   
-  // Format percentage
   const formatPercentage = (value: number | undefined) => {
     if (value === undefined) return 'N/A';
     return `${(value * 100).toFixed(1)}%`;
   };
   
-  // Generate stars based on rating
   const renderStars = (rating: number | undefined) => {
     if (rating === undefined) return 'Not rated';
     
@@ -68,11 +62,10 @@ const Agencies: React.FC = () => {
     );
   };
   
-  // Column definitions
   const columns: ColumnDef<Company>[] = [
     {
       accessorKey: "name",
-      header: "Agency Name",
+      header: "Nome da Agência",
       cell: ({ row }) => (
         <div className="flex items-center space-x-3">
           <Avatar className="h-8 w-8">
@@ -86,12 +79,12 @@ const Agencies: React.FC = () => {
     },
     {
       accessorKey: "rating",
-      header: "Rating",
+      header: "Avaliação",
       cell: ({ row }) => renderStars(row.getValue("rating")),
     },
     {
       accessorKey: "successRate",
-      header: "Success Rate",
+      header: "Taxa de Sucesso",
       cell: ({ row }) => formatPercentage(row.getValue("successRate")),
     },
     {
@@ -103,7 +96,7 @@ const Agencies: React.FC = () => {
           size="sm"
           onClick={() => navigate(`/agencies/${row.original.id}`)}
         >
-          View Profile
+          Ver Perfil
         </Button>
       ),
     }
@@ -112,15 +105,15 @@ const Agencies: React.FC = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold">Collection Agencies</h1>
+        <h1 className="text-3xl font-bold">Agências de Cobrança</h1>
         <Button>
-          <Users className="mr-2 h-4 w-4" /> Invite New Agency
+          <Users className="mr-2 h-4 w-4" /> Convidar Nova Agência
         </Button>
       </div>
       
       <Card>
         <CardHeader>
-          <CardTitle>All Agencies</CardTitle>
+          <CardTitle>Todas as Agências</CardTitle>
         </CardHeader>
         <CardContent>
           <DataTable columns={columns} data={agencies} />

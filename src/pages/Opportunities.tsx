@@ -90,10 +90,10 @@ const Opportunities: React.FC = () => {
       <Card>
         <CardHeader className="flex flex-row items-center gap-2">
           <AlertCircle className="h-5 w-5 text-destructive" />
-          <CardTitle>Access Denied</CardTitle>
+          <CardTitle>Acesso Negado</CardTitle>
         </CardHeader>
         <CardContent>
-          <p>This page is only available for collection agencies.</p>
+          <p>Esta página é exclusiva para agências de cobrança.</p>
         </CardContent>
       </Card>
     );
@@ -102,33 +102,33 @@ const Opportunities: React.FC = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold">Debt Collection Opportunities</h1>
+        <h1 className="text-3xl font-bold">Oportunidades de Cobrança</h1>
       </div>
       
       <Card>
         <CardHeader>
-          <CardTitle>Available Portfolios</CardTitle>
+          <CardTitle>Portfólios Disponíveis</CardTitle>
           <CardDescription>
-            Browse available debt portfolios open for bids from collection agencies
+            Navegue pelos portfólios de dívidas disponíveis para lance
           </CardDescription>
         </CardHeader>
         <CardContent>
           {isLoading ? (
-            <div className="text-center py-8">Loading opportunities...</div>
+            <div className="text-center py-8">Carregando oportunidades...</div>
           ) : error ? (
             <div className="bg-destructive/10 p-4 rounded-md text-center">
-              Failed to load opportunities. Please try again later.
+              Falha ao carregar oportunidades. Por favor, tente novamente mais tarde.
             </div>
           ) : opportunities && opportunities.length > 0 ? (
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Portfolio</TableHead>
-                  <TableHead>Institution</TableHead>
-                  <TableHead className="text-right">Total Value</TableHead>
-                  <TableHead className="text-right">Debtors</TableHead>
-                  <TableHead className="text-right">Average Debt</TableHead>
-                  <TableHead className="text-right">Due Date</TableHead>
+                  <TableHead>Portfólio</TableHead>
+                  <TableHead>Instituição</TableHead>
+                  <TableHead className="text-right">Valor Total</TableHead>
+                  <TableHead className="text-right">Devedores</TableHead>
+                  <TableHead className="text-right">Dívida Média</TableHead>
+                  <TableHead className="text-right">Data Limite</TableHead>
                   <TableHead></TableHead>
                 </TableRow>
               </TableHeader>
@@ -163,9 +163,9 @@ const Opportunities: React.FC = () => {
             <div className="text-center py-12 flex flex-col items-center gap-4">
               <FileText className="h-12 w-12 text-muted-foreground/50" />
               <div>
-                <p className="font-medium mb-1">No opportunities available</p>
+                <p className="font-medium mb-1">Nenhuma oportunidade disponível</p>
                 <p className="text-sm text-muted-foreground">
-                  Check back later for new debt portfolios to bid on
+                  Volte mais tarde para novos portfólios de dívidas para lance
                 </p>
               </div>
             </div>
@@ -175,31 +175,37 @@ const Opportunities: React.FC = () => {
       
       <Card>
         <CardHeader>
-          <CardTitle>Portfolio Insights</CardTitle>
-          <CardDescription>Additional information about debt portfolios</CardDescription>
+          <CardTitle>Informações do Portfólio</CardTitle>
+          <CardDescription>Informações adicionais sobre portfólios de dívidas</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h3 className="font-medium mb-2">Types of Debt</h3>
+              <h3 className="font-medium mb-2">Tipos de Dívida</h3>
               <div className="space-y-2 text-sm">
-                {['Credit Card', 'Personal Loans', 'Auto Loans', 'Mortgages', 'Business Loans'].map((type) => (
+                {[
+                  'Cartão de Crédito',
+                  'Empréstimos Pessoais',
+                  'Financiamento de Veículos',
+                  'Hipotecas',
+                  'Empréstimos Empresariais'
+                ].map((type) => (
                   <div key={type} className="flex justify-between">
                     <span>{type}</span>
-                    <Badge variant="outline">Available</Badge>
+                    <Badge variant="outline">Disponível</Badge>
                   </div>
                 ))}
               </div>
             </div>
             
             <div>
-              <h3 className="font-medium mb-2">Bidding Guidelines</h3>
+              <h3 className="font-medium mb-2">Diretrizes para Lance</h3>
               <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
-                <li>Review portfolio details carefully before submitting a bid</li>
-                <li>Bids must include both fixed fee and percentage components</li>
-                <li>Include recovery strategy summary with your proposal</li>
-                <li>Bids are binding once submitted and accepted</li>
-                <li>Institutions will evaluate bids based on terms and agency ratings</li>
+                <li>Revise os detalhes do portfólio cuidadosamente antes de enviar um lance</li>
+                <li>Lances devem incluir tanto taxa fixa quanto componentes percentuais</li>
+                <li>Inclua resumo da estratégia de recuperação com sua proposta</li>
+                <li>Lances são vinculativos uma vez submetidos e aceitos</li>
+                <li>Instituições avaliarão lances com base em termos e avaliações da agência</li>
               </ul>
             </div>
           </div>
