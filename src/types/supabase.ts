@@ -83,6 +83,49 @@ export interface Database {
           updated_at?: string;
         };
       };
+      debtors: {
+        Row: {
+          id: string;
+          name: string;
+          document: string;
+          debt_value: number;
+          debt_date: string;
+          created_at: string;
+          updated_at: string;
+          email: string | null;
+          phone: string | null;
+          address: string | null;
+          portfolio_id: string;
+          status: 'pending' | 'negotiating' | 'paid' | 'written_off';
+        };
+        Insert: {
+          id?: string;
+          name: string;
+          document: string;
+          debt_value: number;
+          debt_date: string;
+          created_at?: string;
+          updated_at?: string;
+          email?: string | null;
+          phone?: string | null;
+          address?: string | null;
+          portfolio_id: string;
+          status?: 'pending' | 'negotiating' | 'paid' | 'written_off';
+        };
+        Update: {
+          id?: string;
+          name?: string;
+          document?: string;
+          debt_value?: number;
+          debt_date?: string;
+          updated_at?: string;
+          email?: string | null;
+          phone?: string | null;
+          address?: string | null;
+          portfolio_id?: string;
+          status?: 'pending' | 'negotiating' | 'paid' | 'written_off';
+        };
+      };
     };
   };
 }
