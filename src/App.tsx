@@ -35,6 +35,7 @@ const App = () => (
             
             {/* Protected routes - wrapped in MainLayout */}
             <Route element={<MainLayout />}>
+              {/* Dashboard route */}
               <Route 
                 path="/dashboard" 
                 element={
