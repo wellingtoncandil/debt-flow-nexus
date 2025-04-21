@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,42 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Custom colors for debt collection platform
+				fin: {
+					blue: {
+						100: '#E6F0FF',
+						200: '#CCE0FF',
+						300: '#99C0FF',
+						400: '#6691FF',
+						500: '#3361FF',  // Primary Financial Blue
+						600: '#274CD0',
+						700: '#1A36A0',
+						800: '#0E2470',
+						900: '#071240'
+					},
+					green: {
+						100: '#E6FAF0',
+						200: '#CCF5E0',
+						300: '#99EAC2',
+						400: '#66E0A3',
+						500: '#33D685', // Success Green
+						600: '#27AC6A',
+						700: '#1A8150',
+						800: '#0E5735',
+						900: '#072D1A'
+					},
+					neutral: {
+						100: '#F8FAFC',
+						200: '#EEF2F6',
+						300: '#E3E8EF',
+						400: '#CDD5DF',
+						500: '#97A3B4', // Muted Text
+						600: '#667080',
+						700: '#4B5563',
+						800: '#2F3845',
+						900: '#1C2434'
+					}
 				}
 			},
 			borderRadius: {
@@ -84,11 +121,22 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'fade-in': {
+					"0%": {
+						opacity: "0",
+						transform: "translateY(10px)"
+					},
+					"100%": {
+						opacity: "1",
+						transform: "translateY(0)"
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fade-in 0.5s ease-out'
 			}
 		}
 	},
