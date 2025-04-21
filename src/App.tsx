@@ -17,7 +17,8 @@ import Contracts from "./pages/Contracts";
 import Payments from "./pages/Payments";
 import Agencies from "./pages/Agencies";
 import NotFound from "./pages/NotFound";
-import MainLayout from "./components/layout/MainLayout";
+import MainLayout from "@/components/layout/MainLayout";
+import UploadDebtors from "./pages/UploadDebtors";
 
 const queryClient = new QueryClient();
 
@@ -57,6 +58,14 @@ const App = () => (
                 element={
                   <RouteGuard allowedRoles={['institution']}>
                     <PortfolioDetail />
+                  </RouteGuard>
+                } 
+              />
+              <Route 
+                path="/upload-debtors" 
+                element={
+                  <RouteGuard allowedRoles={['institution']}>
+                    <UploadDebtors />
                   </RouteGuard>
                 } 
               />

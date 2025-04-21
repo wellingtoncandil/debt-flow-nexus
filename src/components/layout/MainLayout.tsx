@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useNavigate, Outlet } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
@@ -31,10 +30,11 @@ const MainLayout: React.FC = () => {
   // Define navigation based on user role
   const institutionNav = [
     { title: 'Dashboard', href: '/dashboard', icon: PieChart },
+    { title: 'Upload de Devedores', href: '/upload-debtors', icon: FileText },
     { title: 'Portfolios', href: '/portfolios', icon: FileText },
     { title: 'Agencies', href: '/agencies', icon: Users },
     { title: 'Contracts', href: '/contracts', icon: FileText },
-    { title: 'Payments', href: '/payments', icon: DollarSign },
+    { title: 'Payments', href: '/payments', icon: FileText },
     { title: 'Settings', href: '/settings', icon: Settings },
   ];
 
