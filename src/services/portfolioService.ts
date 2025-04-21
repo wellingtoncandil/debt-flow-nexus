@@ -1,52 +1,72 @@
 
-import { DebtPortfolio, CreatePortfolioData } from '@/types/portfolio';
+import { supabase } from './supabaseClient';
+import { CreatePortfolioData } from '@/types/portfolio';
 
-// Simulated API calls - replace with real API calls later
 export const portfolioService = {
-  getPortfolios: async (institutionId: string): Promise<DebtPortfolio[]> => {
-    // Simulated API response
-    return [
-      {
-        id: 'port-1',
-        name: 'Consumer Loans Q1 2025',
-        totalDebtValue: 2000000,
-        debtorCount: 150,
-        status: 'bidding',
-        createdAt: '2025-01-01',
-        dueDate: '2025-06-30',
-        institutionId,
-      },
-      {
-        id: 'port-2',
-        name: 'Credit Card Debts March 2025',
-        totalDebtValue: 1500000,
-        debtorCount: 200,
-        status: 'draft',
-        createdAt: '2025-03-01',
-        dueDate: '2025-09-30',
-        institutionId,
-      },
-    ] as DebtPortfolio[];
+  getPortfolios: async (institutionId: string) => {
+    const { data, error } = await supabase
+      .from('portfolios')
+      .select('*')
+      .eq('institution_id', institutionId)
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+    return data;
   },
 
-  createPortfolio: async (institutionId: string, data: CreatePortfolioData): Promise<DebtPortfolio> => {
-    // Simulated API call
-    return {
-      id: `port-${Date.now()}`,
-      ...data,
-      status: 'draft',
-      createdAt: new Date().toISOString(),
-      institutionId,
-    };
+  createPortfolio: async (institutionId: string, data: CreatePortfolioData) => {
+    const { data: newPortfolio, error } = await supabase
+      .from('portfolios')
+      .insert([
+        {
+          name: data.name,
+          total_debt_value: data.totalDebtValue,
+          debtor_count: data.debtorCount,
+          due_date: data.dueDate,
+          institution_id: institutionId,
+        },
+      ])
+      .select()
+      .single();
+
+    if (error) throw error;
+    return newPortfolio;
   },
 
   getPortfolioStats: async (institutionId: string) => {
-    // Simulated API call
-    return {
-      totalValue: 3500000,
-      recoveredValue: 1200000,
-      recoveryRate: 0.34,
-      activePortfolios: 2,
+    const { data: portfolios, error } = await supabase
+      .from('portfolios')
+      .select('total_debt_value, status')
+      .eq('institution_id', institutionId);
+
+    if (error) throw error;
+
+    const stats = {
+      totalValue: 0,
+      recoveredValue: 0,
+      recoveryRate: 0,
+      activePortfolios: 0,
     };
+
+    if (portfolios) {
+      stats.totalValue = portfolios.reduce((sum, p) => sum + (p.total_debt_value || 0), 0);
+      stats.activePortfolios = portfolios.filter(p => p.status !== 'completed').length;
+      
+      // TODO: Implement recovered value calculation when payments table is ready
+      stats.recoveryRate = stats.recoveredValue / stats.totalValue || 0;
+    }
+
+    return stats;
+  },
+
+  getPortfolioById: async (id: string) => {
+    const { data, error } = await supabase
+      .from('portfolios')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error) throw error;
+    return data;
   },
 };

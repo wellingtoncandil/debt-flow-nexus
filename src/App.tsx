@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -33,19 +32,68 @@ const App = () => (
             
             {/* Protected routes - wrapped in MainLayout */}
             <Route element={<MainLayout />}>
-              <Route path="/dashboard" element={<Dashboard />} />
+              <Route 
+                path="/dashboard" 
+                element={
+                  <RouteGuard>
+                    <Dashboard />
+                  </RouteGuard>
+                } 
+              />
               
               {/* Institution routes */}
-              <Route path="/portfolios" element={<Portfolios />} />
-              <Route path="/portfolios/:id" element={<PortfolioDetail />} />
-              <Route path="/agencies" element={<Agencies />} />
+              <Route 
+                path="/portfolios" 
+                element={
+                  <RouteGuard allowedRoles={['institution']}>
+                    <Portfolios />
+                  </RouteGuard>
+                } 
+              />
+              <Route 
+                path="/portfolios/:id" 
+                element={
+                  <RouteGuard allowedRoles={['institution']}>
+                    <PortfolioDetail />
+                  </RouteGuard>
+                } 
+              />
+              <Route 
+                path="/agencies" 
+                element={
+                  <RouteGuard allowedRoles={['institution']}>
+                    <Agencies />
+                  </RouteGuard>
+                } 
+              />
               
               {/* Agency routes */}
-              <Route path="/opportunities" element={<Opportunities />} />
+              <Route 
+                path="/opportunities" 
+                element={
+                  <RouteGuard allowedRoles={['agency']}>
+                    <Opportunities />
+                  </RouteGuard>
+                } 
+              />
               
               {/* Common routes */}
-              <Route path="/contracts" element={<Contracts />} />
-              <Route path="/payments" element={<Payments />} />
+              <Route 
+                path="/contracts" 
+                element={
+                  <RouteGuard>
+                    <Contracts />
+                  </RouteGuard>
+                } 
+              />
+              <Route 
+                path="/payments" 
+                element={
+                  <RouteGuard>
+                    <Payments />
+                  </RouteGuard>
+                } 
+              />
             </Route>
             
             {/* Redirect root to dashboard */}
