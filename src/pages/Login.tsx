@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
@@ -19,7 +18,7 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('institution');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!email || !password) {
@@ -32,7 +31,7 @@ const Login: React.FC = () => {
     }
 
     try {
-      login(email, password, role);
+      await login(email, password);
       toast({
         title: "Success",
         description: "You are now logged in",
