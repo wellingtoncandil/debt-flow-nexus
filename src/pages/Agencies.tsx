@@ -8,8 +8,26 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Company } from '@/types';
 import { Users, Star } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 const Agencies: React.FC = () => {
+  const { currentUser } = useAuth();
+  const navigate = useNavigate();
+  
+  // Check if user is an institution
+  if (currentUser?.role !== 'institution') {
+    return (
+      <Alert variant="destructive">
+        <AlertTitle>Acesso Negado</AlertTitle>
+        <AlertDescription>
+          Esta página é exclusiva para instituições financeiras.
+        </AlertDescription>
+      </Alert>
+    );
+  }
+  
   // Filter only agency companies
   const agencies = mockCompanies.filter(c => c.type === 'agency');
   
@@ -80,7 +98,13 @@ const Agencies: React.FC = () => {
       id: "actions",
       header: "",
       cell: ({ row }) => (
-        <Button variant="outline" size="sm">View Profile</Button>
+        <Button 
+          variant="outline" 
+          size="sm"
+          onClick={() => navigate(`/agencies/${row.original.id}`)}
+        >
+          View Profile
+        </Button>
       ),
     }
   ];

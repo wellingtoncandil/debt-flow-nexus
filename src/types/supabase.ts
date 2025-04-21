@@ -29,6 +29,12 @@ export interface Database {
           success_rate: number | null;
           created_at: string;
           updated_at: string;
+          description: string | null;
+          founded_year: number | null;
+          employee_count: number | null;
+          website: string | null;
+          specialties: string[] | null;
+          logo_url: string | null;
         };
         Insert: {
           id?: string;
@@ -37,6 +43,12 @@ export interface Database {
           success_rate?: number;
           created_at?: string;
           updated_at?: string;
+          description?: string | null;
+          founded_year?: number | null;
+          employee_count?: number | null;
+          website?: string | null;
+          specialties?: string[] | null;
+          logo_url?: string | null;
         };
         Update: {
           id?: string;
@@ -44,6 +56,12 @@ export interface Database {
           rating?: number;
           success_rate?: number;
           updated_at?: string;
+          description?: string | null;
+          founded_year?: number | null;
+          employee_count?: number | null;
+          website?: string | null;
+          specialties?: string[] | null;
+          logo_url?: string | null;
         };
       };
       portfolios: {
@@ -58,6 +76,11 @@ export interface Database {
           due_date: string;
           assigned_agency_id: string | null;
           updated_at: string;
+          description: string | null;
+          average_debt: number | null;
+          location_data: string | null;
+          debt_age: number | null;
+          industry_type: string | null;
         };
         Insert: {
           id?: string;
@@ -70,6 +93,11 @@ export interface Database {
           due_date: string;
           assigned_agency_id?: string;
           updated_at?: string;
+          description?: string | null;
+          average_debt?: number | null;
+          location_data?: string | null;
+          debt_age?: number | null;
+          industry_type?: string | null;
         };
         Update: {
           id?: string;
@@ -81,6 +109,11 @@ export interface Database {
           due_date?: string;
           assigned_agency_id?: string;
           updated_at?: string;
+          description?: string | null;
+          average_debt?: number | null;
+          location_data?: string | null;
+          debt_age?: number | null;
+          industry_type?: string | null;
         };
       };
       debtors: {

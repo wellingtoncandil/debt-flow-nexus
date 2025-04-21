@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -16,6 +17,7 @@ import Opportunities from "./pages/Opportunities";
 import Contracts from "./pages/Contracts";
 import Payments from "./pages/Payments";
 import Agencies from "./pages/Agencies";
+import AgencyProfile from "./pages/AgencyProfile";
 import NotFound from "./pages/NotFound";
 import MainLayout from "@/components/layout/MainLayout";
 import UploadDebtors from "./pages/UploadDebtors";
@@ -75,6 +77,14 @@ const App = () => (
                 element={
                   <RouteGuard allowedRoles={['institution']}>
                     <Agencies />
+                  </RouteGuard>
+                } 
+              />
+              <Route 
+                path="/agencies/:id" 
+                element={
+                  <RouteGuard allowedRoles={['institution']}>
+                    <AgencyProfile />
                   </RouteGuard>
                 } 
               />

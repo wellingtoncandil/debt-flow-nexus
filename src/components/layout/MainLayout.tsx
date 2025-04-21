@@ -1,9 +1,10 @@
+
 import React from 'react';
 import { useNavigate, Outlet } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { SidebarProvider, Sidebar, SidebarContent, SidebarHeader, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarTrigger } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
-import { BarChart, FileText, Users, Settings, PieChart, DollarSign, CreditCard } from 'lucide-react';
+import { BarChart, FileText, Users, Settings, PieChart, DollarSign, CreditCard, Link, Star } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 
@@ -33,15 +34,15 @@ const MainLayout: React.FC = () => {
     { title: 'Upload de Devedores', href: '/upload-debtors', icon: FileText },
     { title: 'Portfolios', href: '/portfolios', icon: FileText },
     { title: 'Agencies', href: '/agencies', icon: Users },
-    { title: 'Contracts', href: '/contracts', icon: FileText },
-    { title: 'Payments', href: '/payments', icon: FileText },
+    { title: 'Contracts', href: '/contracts', icon: Link },
+    { title: 'Payments', href: '/payments', icon: DollarSign },
     { title: 'Settings', href: '/settings', icon: Settings },
   ];
 
   const agencyNav = [
     { title: 'Dashboard', href: '/dashboard', icon: BarChart },
     { title: 'Opportunities', href: '/opportunities', icon: FileText },
-    { title: 'Contracts', href: '/contracts', icon: FileText },
+    { title: 'Contracts', href: '/contracts', icon: Link },
     { title: 'Payments', href: '/payments', icon: CreditCard },
     { title: 'Settings', href: '/settings', icon: Settings },
   ];
