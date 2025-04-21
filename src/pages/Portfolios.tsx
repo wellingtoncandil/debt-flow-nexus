@@ -43,7 +43,11 @@ const Portfolios = () => {
             title="Recovery Rate"
             value={portfolioStats.recoveryRate}
             icon={<PieChart className="h-4 w-4" />}
-            formatter={(value) => `${(value * 100).toFixed(1)}%`}
+            formatter={(value) => {
+              // Convert the value to a number before arithmetic operation
+              const numericValue = typeof value === 'number' ? value : 0;
+              return `${(numericValue * 100).toFixed(1)}%`;
+            }}
           />
           <StatCard
             title="Active Portfolios"
